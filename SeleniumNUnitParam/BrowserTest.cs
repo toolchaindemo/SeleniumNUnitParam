@@ -21,24 +21,30 @@ namespace SeleniumNUnitParam
             Driver.FindElement(By.Name("q")).SendKeys("Selenium");
             System.Threading.Thread.Sleep(5000);
             Driver.FindElement(By.Name("btnG")).Click();
-            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true),
-                                ExecuteAutomationTest            "The text selenium doest exist");
+            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true), "The text selenium doest exist");
             */ 
-            //Create the reference for our browser
-            IWebDriver driver = new ChromeDriver();
-
-            //Navigate to google page
-            driver.Navigate().GoToUrl("http:www.google.com");
-            driver.FindElement(By.Name("q")).SendKeys("Selenium");
-            System.Threading.Thread.Sleep(5000);
-
-            //Perform Ops
-            driver.FindElement(By.Name("btnG")).Click();
+            // Declaring and initialising the HtmlUnitWebDriver
+            HtmlUnitDriver unitDriver = new HtmlUnitDriver();
             
-            Assert.That(driver.PageSource.Contains("Selenium"), Is.EqualTo(true), "The text selenium doest not exist");
-            
-            //Close the browser
-            driver.Close();
+            // open google.com webpage
+            unitDriver.get("http://www.google.com");
+
+            System.out.println("Title of the page is -> " + unitDriver.getTitle());
+
+            // find the search edit box on the google page
+            WebElement searchBox = unitDriver.findElement(By.name("q"));
+
+            // type in Selenium
+            searchBox.sendKeys("Selenium");
+
+            // find the search button
+            WebElement button = unitDriver.findElement(By.name("btnG"));
+
+            // Click the button
+            button.click();
+            Assert.That(unitDriver.PageSource.Contains("Selenium"), Is.EqualTo(true),
+                                            "The text selenium doest not exist");
+            System.out.println("Title of the page is -> " + unitDriver.getTitle());
 
         }
 
