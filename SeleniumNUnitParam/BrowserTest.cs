@@ -11,13 +11,6 @@ namespace SeleniumNUnitParam
     public class BrowserTest : Hooks
     {
 
-
-        [Test]
-        public void TestApp()
-        {
-         
-        }
-
         [Test]
         public void ExecuteAutomationTest()
         {
