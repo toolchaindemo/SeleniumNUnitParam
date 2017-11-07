@@ -15,8 +15,7 @@ namespace SeleniumNUnitParam
         [Test]
         public void TestApp()
         {
-            Driver.Url = "http://www.demoqa.com";
-            Driver.Close();
+         
         }
 
         [Test]
