@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -8,43 +8,35 @@ using System.Threading.Tasks;
 
 namespace SeleniumNUnitParam
 {
-    class Program
+    public class BrowserTest : Hooks
     {
-        //Create Global reference for our browser via WebDriver
-        IWebDriver driver = new ChromeDriver();
-
-        [SetUp]
-        public void Initialize()
-        {
-            //Navigate to Execute automation demo page
-            driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html?UserName=&amp;Password=&amp;Login=Login");
-            Console.WriteLine("Opened URL");
-        }
 
 
         [Test]
-        public void ExecuteTest()
+        public void GoogleTest()
         {
-            //Find the Element
-            IWebElement element = driver.FindElement(By.Id("q"));
+            Driver.Navigate().GoToUrl("http://www.google.com");
+            Driver.FindElement(By.Name("q")).SendKeys("Selenium");
+            System.Threading.Thread.Sleep(5000);
+            Driver.FindElement(By.Name("btnG")).Click();
+            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true),
+                                            "The text selenium doest not exist");
 
-            //Perform Ops
-            element.SendKeys("executeautomation");
-
-            Console.WriteLine("Executed Test");
         }
 
         [Test]
-        public void NextTest()
+        public void ExecuteAutomationTest()
         {
-            Console.WriteLine("Next method");
+            Driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
+            Driver.FindElement(By.Name("UserName")).SendKeys("admin");
+            Driver.FindElement(By.Name("Password")).SendKeys("admin");
+            Driver.FindElement(By.Name("Login")).Submit();
+            System.Threading.Thread.Sleep(2000);
+            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true),
+                                            "The text selenium doest not exist");
+
         }
 
-        [TearDown]
-        public void CleanUp()
-        {
-            driver.Close();
-            Console.WriteLine("Closed the browser");
-        }
- }
+
+    }
 }
