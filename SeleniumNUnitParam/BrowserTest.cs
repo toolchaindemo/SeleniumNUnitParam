@@ -20,7 +20,7 @@ namespace SeleniumNUnitParam
             System.Threading.Thread.Sleep(5000);
             //Driver.FindElement(By.Name("btnG")).Click();
             // ignore
-            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(false), "The text selenium doest exist");
+            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true), "The text selenium doest exist");
         }
 
         [Test]
