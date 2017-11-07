@@ -8,31 +8,43 @@ using System.Threading.Tasks;
 
 namespace SeleniumNUnitParam
 {
-    public class BrowserTest : Hooks
+    class Program
     {
+        //Create Global reference for our browser via WebDriver
+        IWebDriver driver = new ChromeDriver();
 
-        [Test]
-        public void GoogleTest()
+        [SetUp]
+        public void Initialize()
         {
-            Driver.Navigate().GoToUrl("http://www.google.com");
-            Driver.FindElement(By.Name("q")).SendKeys("Selenium");
-            System.Threading.Thread.Sleep(10000);
-            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true), "The text selenium doest exist");
-        }
-
-        [Test]
-        public void ExecuteAutomationTest()
-        {
-            Driver.Navigate().GoToUrl("http://executeautomation.com/demosite/Login.html");
-            Driver.FindElement(By.Name("UserName")).SendKeys("admin");
-            Driver.FindElement(By.Name("Password")).SendKeys("admin");
-            Driver.FindElement(By.Name("Login")).Submit();
-            System.Threading.Thread.Sleep(2000);
-            Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true),
-                                            "The text selenium doest not exist");
-
+            //Navigate to Execute automation demo page
+            driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html?UserName=&amp;Password=&amp;Login=Login");
+            Console.WriteLine("Opened URL");
         }
 
 
-    }
+        [Test]
+        public void ExecuteTest()
+        {
+            //Find the Element
+            IWebElement element = driver.FindElement(By.Id("q"));
+
+            //Perform Ops
+            element.SendKeys("executeautomation");
+
+            Console.WriteLine("Executed Test");
+        }
+
+        [Test]
+        public void NextTest()
+        {
+            Console.WriteLine("Next method");
+        }
+
+        [TearDown]
+        public void CleanUp()
+        {
+            driver.Close();
+            Console.WriteLine("Closed the browser");
+        }
+ }
 }
