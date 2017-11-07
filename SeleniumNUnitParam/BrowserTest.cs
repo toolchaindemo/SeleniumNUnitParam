@@ -15,9 +15,8 @@ namespace SeleniumNUnitParam
         [Test]
         public void TestApp()
         {
-            IWebDriver driver = new FirefoxDriver();
-            driver.Url = "http://www.demoqa.com";
-            driver.Close();
+            Driver.Url = "http://www.demoqa.com";
+            Driver.Close();
         }
 
         [Test]
