@@ -14,7 +14,7 @@ namespace SeleniumNUnitParam
         [Test]
         public void ExecuteAutomationTest()
         {
-            Driver.Navigate().GoToUrl("Google");
+            Driver.Navigate().GoToUrl("http://google.com");
             Driver.FindElement(By.Name("UserName")).SendKeys("admin");
             Driver.FindElement(By.Name("Password")).SendKeys("admin");
             Driver.FindElement(By.Name("Login")).Submit();
